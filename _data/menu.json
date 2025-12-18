@@ -1,0 +1,49 @@
+{
+  "pages": [
+    [ "Introduction", "/introduction" ],
+    [ "Getting Started", "/getting-started" ],
+  
+    [ "Meteor Academy" ],
+    [ "Welcome", "/academy/welcome" ],
+    [ "Make Your App Faster", "/academy/make-your-app-faster" ],
+    [ "Reducing PubSub Data Usage", "/academy/reducing-pubsub-data-usage" ],
+    [ "Know Your Observers", "/academy/know-your-observers" ],
+    [ "Improve CPU & Network Usage", "/academy/improving-cpu-network-usage" ],
+    [ "Optimizing for Live Queries", "/academy/live-queries" ],
+    [ "Optimize for Oplog Integration", "/academy/optimize-your-app-for-oplog" ],
+    [ "Optimize Memory Usage", "/academy/optimize-memory-usage" ],
+    [ "Managing Wait Time", "/academy/managing-waittime" ],
+    [ "Understanding Your Meteor App with Monti Debug", "/academy/understanding-your-meteor-app" ],
+    [ "Reduce Bandwidth and CPU Waste", "/academy/reduce-bandwidth-cpu-waste" ],
+    [ "Finding Hidden Secrets", "/academy/insights" ],
+    [ "Understanding Mean, Histogram and Percentiles", "/academy/mean-histogram-and-percentiles" ],
+    [ "Debugging Response Time Bottlenecks", "/academy/debugging-response-time-bottlenecks" ],
+  
+    [ "Dashboards" ],
+    [ "Overview", "/dashboards/overview-dashboard" ],
+    [ "Methods", "/dashboards/methods-dashboard" ],
+    [ "PubSub", "/dashboards/pubsub-dashboard" ],
+    [ "Live Queries", "/dashboards/live-queries-dashboard" ],
+    [ "Jobs", "/dashboards/jobs-dashboard" ],
+    [ "System", "/dashboards/system-dashboard" ],
+
+    [ "CPU Profiling" ],
+    [ "Record Profile", "/record-cpu-profile" ],
+    [ "Analyze Profile", "/analyze-cpu-profile" ],
+
+    [ "Features" ],
+    [ "Alerts", "/alerts" ],
+    [ "Error Tracking", "/knowledge-base/error-tracking" ],
+    [ "Source Maps", "/source-maps" ],
+    [ "API", "/graphql-api" ],
+
+    [ "Other Resources" ],
+    [ "GDPR", "/gdpr" ],
+    [ "Glossary", "/knowledge-base/glossary" ],
+    [ "null(autopublish) Publication", "/knowledge-base/what-is-null(autopublish)-publication" ],
+    [ "Protect Sensitive Information", "/knowledge-base/how-to-protect-sensitive-information-for-security" ],
+    [ "Custom Hostname", "/knowledge-base/send-data-with-a-custom-hostname" ],
+    [ "Monti Debug in Production", "/knowledge-base/monti-debug-in-production" ],
+    [ "Using Behind Firewall", "/knowledge-base/using-monti-with-enterprise-firewall" ]
+  ]
+}

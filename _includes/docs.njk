@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>{{title}}</title>
+    <meta name='theme-color' content='rgb(50,50,50)'>
+
+    <link rel='icon' type='image/png' href='/favicon.png'>
+    <style>
+      {% include '../styles.njk' %}
+    </style>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator
+          .serviceWorker
+          .getRegistrations()
+          .then(function (registrations) {
+            for (let registration of registrations) {
+              console.log('deregister');
+              registration.unregister();
+            }
+          });
+      }
+
+    </script>
+
+  </head>
+  <body>
+    <nav>
+      <button id="mobile-menu-toggle" class="button-reset" aria-label="Show Menu"">
+        <svg class="close xmlns="http://www.w3.org/2000/svg" width="1.33em" height="1.33em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <svg class="open" width="1.33em" height="1.33em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+      <a href="/" class="brand">
+        <img src="/images/logo.png" alt="Monti APM" />
+      </a>
+      <div class="spacer"></div>
+      <!-- <div class="search"><input type="search" id="search-box" placeholder="Search" /></div> -->
+      <div class="spacer"></div>
+
+      <ul class="main-links">
+        <li class="active">
+          <a href="/">Documentation</a>
+        </li>
+        <li>
+          <a href="https://montiapm.com">Website</a>
+        </li>
+        <li>
+          <a href="https://app.montiapm.com">Dashboard</a>
+        </li>
+      </ul>
+    </nav>
+    {% include 'sidebar.njk' %}
+    <main>
+      <h1>{{title}}</h1>
+      {{ content | safe }}
+      {% include './progression.njk' %}
+    </main>
+    <script data-goatcounter="https://montiapm-docs.counter.zodern.me/count"
+        async src="//montiapm-docs.counter.zodern.me/count.js"></script>
+  </body>
+</html>

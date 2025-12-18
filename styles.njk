@@ -1,0 +1,6 @@
+{% set css %}
+  {% include "./_includes/docs.css" %}
+  {% include "_includes/sidebar.css" %}
+  {% include "_includes/prism.css" %}
+{% endset %}
+  {{ css | cssmin |  safe }}

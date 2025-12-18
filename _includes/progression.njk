@@ -1,0 +1,19 @@
+  <div class='progression'>
+    {% if progression.prev %}
+      <a class='prev-article' href="{{ progression.prev[1] }}">
+      <div class='prev'>
+        <div class='progression-label'>PREVIOUS</div>
+        <div class='progression-title'>{{ progression.prev[0] }}</div>
+      </div>
+      </a>
+    {% endif %}
+    <div class='spacer'></div>
+    {% if progression.next %}
+      <a class='next-article' href="{{ progression.next[1] }}">
+      <div class='next'>
+        <div class='progression-label'>NEXT</div>
+        <div class='progression-title'>{{ progression.next[0] }}</div>
+      </div>
+      </a>
+    {% endif %}
+  </div>

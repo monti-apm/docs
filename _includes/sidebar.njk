@@ -1,0 +1,61 @@
+<div class="sidebar">
+  <ul class="main-links">
+    <li class="active">
+      <a href="/">Documentation</a>
+    </li>
+    <li>
+      <a href="https://montiapm.com">Website</a>
+    </li>
+    <li>
+      <a href="https://app.montiapm.com">Dashboard</a>
+    </li>
+  </ul>
+  <ul id="toc" class='guide-toc'>
+    {% for entry in menu.pages %}
+      {% if entry[1] %}
+        <li {% if (page.url | removeTrailingSlash) == entry[1] %} class="active" {% endif %}>
+          <a class="section {% if (page.url | removeTrailingSlash) == entry[1] %}active{% endif %}" href="{{ entry[1] }}">
+            {{entry[0]}}
+          </a>
+        </li> 
+      {% else %}
+        <li>
+          <h4>{{entry[0]}}</h4>
+        </li>
+      {%endif %}
+    {%endfor%}
+  </ul>
+</div>
+
+<script>
+  const tocEl = document.querySelector('.sidebar');
+  const buttonEl = document.getElementById('mobile-menu-toggle');
+
+  function updateButtonContent() {
+    let opened = tocEl.classList.contains('show-toc');
+
+    if (opened) {
+      buttonEl.classList.add('opened');
+    } else {
+      buttonEl.classList.remove('opened');
+    }
+  }
+
+  updateButtonContent();
+
+  buttonEl.addEventListener('click', function () {
+      tocEl
+        .classList
+        .toggle('show-toc');
+
+      updateButtonContent();
+    });
+
+  let activeSidebarEntry = tocEl.querySelector('.guide-toc .active');
+  if (activeSidebarEntry) {
+    let rect = activeSidebarEntry.getBoundingClientRect();
+    tocEl.scrollTo({
+      top: rect.top - window.innerHeight / 4
+    });
+  }
+</script>
