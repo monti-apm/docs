@@ -28,6 +28,36 @@ Monti APM can track both server and client side errors alike. See a list of erro
 
 Monti APM not only tracks errors, but it also trace errors and shows the context for your error. It includes, all the major events related to the trace. Then you can easily reproduce and fix the error very quickly. See below for some error traces which has been captured with Monti APM.
 
+## Repeated live-query polling diagnostic
+
+The server agent automatically reports `Repeated live-query polling detected: <publication> / <collection>` when the same Mongo polling observer performs at least three polls and fetches at least 25,000 cumulative documents within 15 minutes.
+
+This diagnostic distinguishes repeated work from a single large initial fetch. For example, `catalogIcons` fetching 12,000 documents once may be intentional, while polling that result every five minutes repeatedly runs the query and diffs the result. The diagnostic includes the publication, collection, polling interval, poll durations, cumulative documents and approximate bytes, non-oplog reason, and CPU usage at reporting time. CPU is context only and never decides whether a report is created.
+
+The agent reports the diagnostic through `Monti.trackError`; it never throws the error or changes the observer. It also excludes selectors, publication parameters, document contents, and document identifiers. Identical publication/collection reports are limited to once per hour in each server process.
+
+The defaults can be changed in the options passed to `Monti.connect` or in `monti.options` in Meteor settings:
+
+```js
+Monti.connect('<appId>', '<appSecret>', {
+  liveQueryPollingWindowMs: 900000,
+  liveQueryPollingMinCycles: 3,
+  liveQueryPollingDocumentBudget: 25000,
+});
+```
+
+The detector retains at most 16 one-minute buckets per observer. `liveQueryPollingWindowMs` is therefore capped at the default 15-minute window; it can be reduced for a shorter window. Set `liveQueryPollingDocumentBudget` to `0` to disable this diagnostic without disabling other error tracking.
+
+The corresponding environment variables are:
+
+| Option | Environment variable | Default |
+| --- | --- | --- |
+| `liveQueryPollingWindowMs` | `MONTI_OPTIONS_LIVE_QUERY_POLLING_WINDOW_MS` | `900000` |
+| `liveQueryPollingMinCycles` | `MONTI_OPTIONS_LIVE_QUERY_POLLING_MIN_CYCLES` | `3` |
+| `liveQueryPollingDocumentBudget` | `MONTI_OPTIONS_LIVE_QUERY_POLLING_DOCUMENT_BUDGET` | `25000` |
+
+Error tracking must be enabled for the report to be sent. Use the [Live Queries dashboard](/dashboards/live-queries-dashboard#fetched-documents) to compare fetched-document activity, then follow the [investigation and remediation guide](/academy/live-queries#investigate-repeated-polling).
+
 ## Tracking Custom Errors
 
 By default, Monti APM tracks all uncaught or unhandled errors for you. However, if you need to handle errors yourself you will need to report the error to Monti APM as well. Here are the some of the options:
