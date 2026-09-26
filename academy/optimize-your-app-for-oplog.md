@@ -61,4 +61,6 @@ Now you clearly know why some of your observers cannot use oplog support. But it
 
 ![Oplog Debugging Support in Monti APM](../../images/oplog-debugging.png)
 
+The agent can also report a [repeated live-query polling diagnostic](/knowledge-base/error-tracking#repeated-live-query-polling-diagnostic) when a polling observer repeatedly crosses its cumulative fetched-document budget. Use its non-oplog reason to identify the relevant case above, then follow the [live-query investigation steps](/academy/live-queries#investigate-repeated-polling). A longer polling interval can reduce pressure temporarily, but enabling oplog support or reducing the query result addresses the recurring work itself.
+
 Now you know how to optimize your app for Meteor’s oplog integration and find out whether oplog support is enabled for your individual observers. If it is not, Monti APM will help you to determine the reason and fix it.

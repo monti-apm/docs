@@ -20,6 +20,10 @@ This is the number of documents fetched from MongoDB via [observers](/knowledge-
 - Every 10 seconds, if this observer is not using the oplog
 - When the observer’s internal buffer becomes empty (with oplog observers only)
 
+The total needs context. A large initial result is not necessarily a problem: a `catalogIcons` publication might intentionally fetch 12,000 documents once. A polling observer that fetches those 12,000 documents every five minutes repeatedly performs database, serialization, and diffing work even when few documents change.
+
+The agent detects this repeated pattern separately. It reports a [repeated live-query polling diagnostic](/knowledge-base/error-tracking#repeated-live-query-polling-diagnostic) only when the same observer crosses both a poll-count threshold and a cumulative-document threshold. See [Optimizing Your Meteor App for Live Queries](/academy/live-queries#investigate-repeated-polling) for investigation and remediation steps.
+
 ## Observer Changes
 
 Once an [observer](/knowledge-base/glossary#observer) is created, it’ll trigger events in a few different scenarios. Here's a list of those event types:

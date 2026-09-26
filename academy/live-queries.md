@@ -35,6 +35,20 @@ Now you can see a set of publications sorted by the number of documents they fet
 * If the "Observer Reuse Ratio" is low, try to reduce it. We’ll talk more about this in a second.
 * If possible, try to reduce the number of documents fetched by changing your code. For instance, You could use a limit when fetching data.
 
+The fetched-document total combines initial and recurring work. A publication such as `catalogIcons` fetching 12,000 documents once can be intentional. Fetching the same result repeatedly with a polling observer is more likely to cause sustained database and CPU pressure. Read the [Fetched Documents dashboard guide](/dashboards/live-queries-dashboard#fetched-documents) for this distinction.
+
+### Investigate repeated polling
+
+The agent can report a [repeated live-query polling diagnostic](/knowledge-base/error-tracking#repeated-live-query-polling-diagnostic) when one polling observer repeatedly fetches a large cumulative result. Start with the publication, collection, polling interval, fetched-document total, duration, and non-oplog reason in the report.
+
+Then work through these fixes:
+
+* Inspect the non-oplog reason and confirm why Meteor selected polling for the observer.
+* Remove `disableOplog` or `_disableOplog` when it is not required.
+* Correct selectors, sort specifications, and projections that Meteor's oplog observer does not support. The [oplog optimization guide](/academy/optimize-your-app-for-oplog) lists common causes.
+* Narrow the selector and projection so each cycle fetches and diffs only the documents and fields the publication needs.
+* Increase `pollingIntervalMs` only as a mitigation. It lowers the frequency of the repeated work but does not remove the underlying polling or oversized result.
+
 ### Reuse observers as much as possible
 
 When you create a Live Query, it’ll create an observer internally. Observers are responsible for watching changes in the DB and notifying the Live Query. However, if there is an existing observer for a similar query, Meteor won’t create a new observer. 
