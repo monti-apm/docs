@@ -6,7 +6,7 @@ title: API
 
 Most data collected and aggregated for your app can be accessed through our REST API. Use it to build custom dashboards, integrations, explore data in ways not possible through Monti APM's UI, or give access to the data in Monti APM to your agents. The API is available for all users and apps.
 
-This REST API replaces our former GraphQL API, and provides more data with more flexible ways to query. 
+This REST API replaces our former GraphQL API, and provides more data with more flexible ways to query.
 
 ### Stability
 

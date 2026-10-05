@@ -35,7 +35,8 @@
     [ "Alerts", "/alerts" ],
     [ "Error Tracking", "/knowledge-base/error-tracking" ],
     [ "Source Maps", "/source-maps" ],
-    [ "API", "/graphql-api" ],
+    [ "New REST API", "/rest-api" ],
+    [ "GraphQL API", "/graphql-api" ],
 
     [ "Other Resources" ],
     [ "GDPR", "/gdpr" ],
